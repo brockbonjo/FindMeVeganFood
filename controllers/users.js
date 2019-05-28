@@ -2,8 +2,6 @@ const User = require('../models/user');
 
 module.exports = {
   index,
-  addFact,
-  delFact
 };
 
 function index(req, res, next) {
@@ -22,23 +20,6 @@ function index(req, res, next) {
       user: req.user,
       name: req.query.name,
       sortKey
-    });
-  });
-}
-
-
-function addFact(req, res, next) {
-  req.user.facts.push(req.body);
-  req.user.save(function(err) {
-    res.redirect('/users');
-  });
-}
-
-function delFact(req, res, next) {
-  User.findOne({'facts._id': req.params.id}, function(err, user) {
-    user.facts.id(req.params.id).remove();
-    user.save(function(err) {
-      res.redirect('/users');
     });
   });
 }
