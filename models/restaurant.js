@@ -1,5 +1,17 @@
-var express = require('express');
+const mongoose = require('mongoose');
 
+// optional shortcut to the mongoose.Schema class
+const Schema = mongoose.Schema;
+
+
+const restaurantSchema = new Schema({
+    name: {
+        type: String,
+    },
+    address: {
+        type: String,
+    },
+})
 
 const restaurants = [
     {name: 'Plow Burger'},
@@ -17,27 +29,7 @@ const restaurants = [
     {name: "Li'l Nonna's"},
     {name: 'Vegan Yacht'},
     {name: 'Revolution Vegan Kitchen'},    
-  ];
-    
-module.exports = {
-  getAll: getAll,
-  getOne,
-  create,
-  remove
-};
+];
 
-function remove(id) {
-  restaurants.splice(id - 1, 1);
-};
-  
-function getAll() {
-  return restaurants;
-};
 
-function getOne(id) {
-  return restaurants[id - 1];
-};
-
-function create(name) {
-  restaurants.push(name);
-};
+module.exports = mongoose.model('Restaurant', restaurantSchema);

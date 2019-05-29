@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <% include ../partials/head %>
+
+  <body>
+    <% include ../partials/header %>
+    <div class="container">
+      <h1><%= title %></h1>
+      <ul>
+        <% foods.forEach((food) => { %>
+          <li><%= food.restaurant.name %> | <%= food.name %></li>
+        <% }) %>
+      </ul>
+    </div>
+    <% include ../partials/footer %>
+  </body>
+</html>

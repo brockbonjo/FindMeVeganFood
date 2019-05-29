@@ -1,4 +1,7 @@
 var mongoose = require('mongoose');
+require('../models/restaurant');
+require('../models/food');
+require('../models/review');
 
 mongoose.connect(process.env.DATABASE_URL, { useNewUrlParser: true });
 

@@ -1,34 +1,18 @@
-var foodsModel = require('../models/food');
+const foodModel = require('../models/food');
 
 module.exports = {
     index: index,
-    show,
-    newFood,
-    create,
-    deleteFood
 };
 
-function deleteFood(req, res) {
-    foodsModel.remove(req.params.id);
-    console.log('test');
-    res.redirect('/foods');
-};
 
-function create(req, res) {
-    foodsModel.create(req.body);
-    return res.redirect('/foods');
-};
-
-function newFood(req, res) {
-    res.render('foods/new');
-};
-
-function index(req, res, next) {
-    var foods = foodsModel.getAll();
-    res.render('foods/index', { title: 'Food List', foods });
-};
-
-function show(req, res, next) {
-    var foods = foodsModel.getOne(req.params.id);
-    res.render('foods/show', { foods });
+async function index(req, res, next) {
+    if (req.query.search) {
+        const regex = new RegExp(`.*${req.query.search}.*`);
+        const query = { '$regex': regex, '$options': 'i' };
+        const foods = await foodModel.find({}).or([{ name: query }, { foodType: query }]).populate('restaurant');
+        res.render('foods/index', { title: `Food List - ${req.query.search}`, foods });
+    } else {
+        const foods = await foodModel.find({}).populate('restaurant');
+        res.render('foods/index', { title: 'Food List', foods });
+    }
 };

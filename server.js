@@ -18,6 +18,7 @@ require('./config/passport');
 // require our routes
 var indexRoutes = require('./routes/index');
 var usersRoutes = require('./routes/users');
+var foodsRoutes = require('./routes/foods');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -36,10 +37,15 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
+// SEED
+// const seedDB = require('./seed');
+// seedDB().then(() => console.log('finished'));
+
 
 // mount all routes with appropriate base paths
 app.use('/', indexRoutes);
 app.use('/', usersRoutes);
+app.use('/foods', foodsRoutes);
 
 // invalid request, send 404 page
 app.use(function(req, res) {

@@ -1,35 +1,16 @@
-var mongoose = require('mongoose');
+const mongoose = require('mongoose');
 
 // optional shortcut to the mongoose.Schema class
-var Schema = mongoose.Schema;
+const Schema = mongoose.Schema;
 
-var reviewSchema = new Schema({
-    review: {
-        type: String,
-    },
-    rating: {
-        type: Number, 
-    },
-});
 
-var foodSchema = new Schema({
-    foodItem: {
-        type: String,
-    },
-    visitDate: {
-        type: Date, 
-        default: function() {
-        return new Date(new Date().setFullYear(new Date().getFullYear() + 1));
-        },
-    },
+const foodSchema = new Schema({
+    name: String,
+    foodType: String,
     restaurant: {
-        type: String,
+        type: Schema.ObjectId,
+        ref: 'Restaurant',
     },
-    reviews: [reviewSchema]
 });
-
-
-
-
 
 module.exports = mongoose.model('Food', foodSchema);
