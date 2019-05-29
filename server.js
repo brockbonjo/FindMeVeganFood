@@ -10,6 +10,12 @@ require('dotenv').config();
 
 // create the Express app
 var app = express();
+app.use(function(req, res, next) {
+  if (req.query._method) {
+    req.method = req.query._method;
+  }
+  next();
+});
 
 // connect to the MongoDB with mongoose
 require('./config/database');

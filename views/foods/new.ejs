@@ -5,18 +5,14 @@
   <body>
     <% include ../partials/header %>
     <div class="container">
-      <h1><%= title %></h1>
+    <h1>NEW</h1>
       <table>
         <tbody>
-          <% foods.forEach((food) => { %>
             <tr>
-              <td><%= food.restaurant.name %> | <%= food.name %></td>
-              <td><a href="/foods/<%= food._id %>">Details</a></td>
+              <td>new</td>
             </tr>
-          <% }) %>
         </tbody>
       </table><br>
-      <a href=".">Home</a>
     </div>
     <% include ../partials/footer %>
   </body>
