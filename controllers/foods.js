@@ -4,7 +4,7 @@ module.exports = {
     index: index,
     show,
     new: newFood,
-    // create
+    create
     // delete
 };
 
@@ -32,13 +32,13 @@ function newFood(req, res) {
     res.render('foods/new');
 };
   
-// function create(req, res) {
-//     const food = new foodModel(req.body);
-//     console.log(food);
-//     food.save(function(err) {
-//       // one way to handle errors
-//       if (err) return res.send(err);
-//       // for now, redirect right back to new.ejs
-//       res.redirect('/foods');
-//     });
-// }
+function create(req, res) {
+    const Food = new foodModel({ 
+        name: req.body.name, 
+        foodType: req.body.foodType, 
+    }).save(function(err) {
+
+      if (err) return res.send(err);
+      res.redirect('/foods');
+    });
+}

@@ -8,7 +8,7 @@ async function seedDB() {
             name: 'Plow Burger', 
             address: '4429 Duval St, Austin, TX 78751', 
             food: {
-                name: 'Plow Burger',
+                name: 'The Plow Burger',
                 foodType: 'cheeseburger',
             }
         },
