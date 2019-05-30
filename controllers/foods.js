@@ -1,44 +1,61 @@
-const foodModel = require('../models/food');
+const Food = require('../models/food');
+const Restaurant = require('../models/restaurant');
 
 module.exports = {
     index: index,
     show,
     new: newFood,
-    create
-    // delete
+    create,
+    deleteFood,
+    // updateFood
 };
 
+
+// async function updateFood(req, res) {
+//     Food.findByIdAndUpdate(
+//         {name: req.body.name, 
+//         foodType: req.body.foodType, 
+//         restaurant: req.body.restaurant,
+//     });
+//     res.redirect('/foods');
+// }
 
 async function index(req, res, next) {
     if (req.query.search) {
         const regex = new RegExp(`.*${req.query.search}.*`);
         const query = { '$regex': regex, '$options': 'i' };
-        const foods = await foodModel.find({}).or([{ name: query }, { foodType: query }]).populate('restaurant');
+        const foods = await Food.find({}).or([{ name: query }, { foodType: query }]).populate('restaurant');
         res.render('foods/index', { title: `Food List - ${req.query.search}`, foods });
     } else {
-        const foods = await foodModel.find({}).populate('restaurant');
+        const foods = await Food.find({}).populate('restaurant');
         res.render('foods/index', { title: 'Food List', foods });
     }
 };
 
-function show(req, res) {
-    foodModel.findById(req.params.id, function(err, food) {
-        if (err) return res.send(err);
-        res.render('foods/show', { food });
-    })
+async function show(req, res) {
+    const food = await Food.findById(req.params.id).populate('restaurant');
+    res.render('foods/show', { food });
 };
   
-function newFood(req, res) {
-    res.render('foods/new');
+async function newFood(req, res) {
+    const restaurants = await Restaurant.find({});
+    res.render('foods/new', { title: 'Add New Food', restaurants });
 };
   
-function create(req, res) {
-    const Food = new foodModel({ 
+async function create(req, res) {
+    console.log(req.body);
+    const food = await new Food({ 
         name: req.body.name, 
         foodType: req.body.foodType, 
-    }).save(function(err) {
+        restaurant: req.body.restaurant,
+    }).save();
+    res.redirect('/foods');
+}
 
-      if (err) return res.send(err);
+function deleteFood(req, res) {
+    Food.findByIdAndDelete(req.params.id, function(err, food){
+      if (err) return res.redirect('/foods');
+        console.log(food);
       res.redirect('/foods');
     });
-}
+  };

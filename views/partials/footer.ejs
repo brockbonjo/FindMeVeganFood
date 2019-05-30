@@ -36,11 +36,16 @@
 
 
 <!--  Scripts-->
-<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-<script src="javascripts/materialize.js"></script>
-<script src="javascripts/init.js"></script>
 <script
   src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
   integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8="
   crossorigin="anonymous">
+</script>
+<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="/javascripts/materialize.js"></script>
+<script src="/javascripts/init.js"></script>
+<script>
+    $(document).ready(function(){
+        $('select').formSelect();
+    });
 </script>

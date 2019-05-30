@@ -7,13 +7,20 @@
     <div class="container">
     <h1>NEW</h1>
     <form id="new-form" action="/foods" method="POST">
-        <label>Food Item:</label>
+      <label>Food Item:</label>
         <input type="text" name="name">
-        <label>Type:</label>
+      <label>Type:</label>
         <input type="text" name="foodType">
-        <label>Restaurant:</label>
+      <div class="input-field col s12">
+          <select name='restaurant'>
+              <% restaurants.forEach((restaurant) => { %>
+                <option value='<%= restaurant._id %>'><%= restaurant.name %></option>
+              <% }) %>
+          </select>
+          <label>Restaurant</label>
+        </div>
 
-
+        <br>
         <input type="submit" value="Add Food Item">
       </form>
     </div>

@@ -4,8 +4,12 @@
 
   <body>
     <% include ../partials/header %>
-    <div class="container">
+    <div class="container">      
+      <a href="./">Home</a>
       <h1>Details</h1>
+      <form action="/foods/<%= food._id %>?_method=DELETE" method="POST">
+        <button type="submit">Delete</button>
+      </form>
       <table>
         <thead>
             <tr>
@@ -19,8 +23,10 @@
               <td><%= food.name %></td>
             </tr>
         </tbody>
-      </table><br>
-      <a href=".">Home</a>
+      </table>
+      <!-- <form action="/foods/<%= food._id %>" method="PUT">
+        <button type="submit">Update Food Item</button>
+      </form> -->
     </div>
     <% include ../partials/footer %>
   </body>
