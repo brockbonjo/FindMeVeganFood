@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<% include ../partials/head %>
+
+<body>
+  <% include ../partials/header %>
+  <div class="container">
+    <h1>Update <%= food.name %></h1>
+    <form id="new-form" action="/foods/<%= food._id %>" method="PUT">
+      <label>Food Item:</label>
+      <input type="text" name="name" value="<%= food.name %>">
+      <label>Type:</label>
+      <input type="text" name="foodType" value="<%= food.foodType %>">
+      <div class="input-field col s12">
+        <select name='restaurant' value="<%= food.restaurant %>">
+          <% restaurants.forEach((restaurant) => { %>
+          <option value='<%= restaurant._id %>'><%= restaurant.name %></option>
+          <% }) %>
+        </select>
+        <label>Restaurant</label>
+      </div>
+
+      <br>
+      <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+          <i class="material-icons right">send</i>
+        </button>
+    </form>
+  </div>
+  <% include ../partials/footer %>
+</body>
+
+</html>

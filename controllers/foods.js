@@ -7,18 +7,24 @@ module.exports = {
     new: newFood,
     create,
     deleteFood,
-    // updateFood
+    editFood,
+    update
 };
 
 
-// async function updateFood(req, res) {
-//     Food.findByIdAndUpdate(
-//         {name: req.body.name, 
-//         foodType: req.body.foodType, 
-//         restaurant: req.body.restaurant,
-//     });
-//     res.redirect('/foods');
-// }
+async function editFood(req, res) {
+    try {
+      const food = await Food.findByIdAndUpdate(req.params.id);
+      res.render('foods/edit', { food });
+    } catch (e) {
+      console.log(e)
+    }
+};
+
+async function update(req, res) {
+    const food = await Food.find({});
+    res.render('foods/:id/edit', { title: 'Edit Food', foods });
+};
 
 async function index(req, res, next) {
     if (req.query.search) {
