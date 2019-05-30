@@ -13,12 +13,12 @@ module.exports = {
 
 
 async function editFood(req, res) {
-    try {
-      const food = await Food.findOneAndUpdate(req.params.id);
-      res.render('foods/edit', { food });
-    } catch (e) {
-      console.log(e)
-    }
+    const food = await Food.findOneAndUpdate({ _id: req.params.id }, { 
+      name: req.body.name, 
+      foodType: req.body.foodType, 
+      restaurant: req.body.restaurant,
+  }).exec();
+    res.redirect(`foods/${req.params.id}`);
 };
 
 async function update(req, res) {
