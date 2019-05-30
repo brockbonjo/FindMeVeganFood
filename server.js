@@ -4,18 +4,13 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var passport = require('passport');
+var methodOverride = require('method-override');
 
 // load the env vars
 require('dotenv').config();
 
 // create the Express app
 var app = express();
-app.use(function(req, res, next) {
-  if (req.query._method) {
-    req.method = req.query._method;
-  }
-  next();
-});
 
 // connect to the MongoDB with mongoose
 require('./config/database');
@@ -25,6 +20,8 @@ require('./config/passport');
 var indexRoutes = require('./routes/index');
 var usersRoutes = require('./routes/users');
 var foodsRoutes = require('./routes/foods');
+
+app.use(methodOverride('_method'));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

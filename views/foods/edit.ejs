@@ -6,7 +6,7 @@
   <% include ../partials/header %>
   <div class="container">
     <h1>Update <%= food.name %></h1>
-    <form id="new-form" action="/foods/<%= food._id %>" method="PUT">
+    <form id="new-form" action="/foods/<%= food._id %>?_method=PUT" method="POST">
       <label>Food Item:</label>
       <input type="text" name="name" value="<%= food.name %>">
       <label>Type:</label>
@@ -21,9 +21,8 @@
       </div>
 
       <br>
-      <button class="btn waves-effect waves-light" type="submit" name="action">Submit
-          <i class="material-icons right">send</i>
-        </button>
+      <button class="btn waves-effect waves-light" type="submit" name="action">
+        <i class="material-icons right">send</i>Submit</button>
     </form>
   </div>
   <% include ../partials/footer %>

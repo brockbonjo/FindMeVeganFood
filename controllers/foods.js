@@ -13,12 +13,14 @@ module.exports = {
 
 
 async function editFood(req, res) {
+    console.log(req.body);
+    console.log(req.params.id);
     const food = await Food.findOneAndUpdate({ _id: req.params.id }, { 
       name: req.body.name, 
       foodType: req.body.foodType, 
       restaurant: req.body.restaurant,
   }).exec();
-    res.redirect(`foods/${req.params.id}`);
+    res.redirect(`/foods/${req.params.id}`);
 };
 
 async function update(req, res) {
