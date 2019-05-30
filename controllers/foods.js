@@ -14,7 +14,7 @@ module.exports = {
 
 async function editFood(req, res) {
     try {
-      const food = await Food.findByIdAndUpdate(req.params.id);
+      const food = await Food.findOneAndUpdate(req.params.id);
       res.render('foods/edit', { food });
     } catch (e) {
       console.log(e)
@@ -22,8 +22,9 @@ async function editFood(req, res) {
 };
 
 async function update(req, res) {
-    const food = await Food.find({});
-    res.render('foods/:id/edit', { title: 'Edit Food', foods });
+    const food = await Food.findById(req.params.id);
+    const restaurants = await Restaurant.find({});
+    res.render('foods/edit', { title: 'Edit Food', food, restaurants });
 };
 
 async function index(req, res, next) {
