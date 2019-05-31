@@ -3,7 +3,7 @@ var passport = require('passport');
 
 // The root route renders our only view
 router.get('/', function(req, res) {
-  res.render('index', { title: 'Find Me Vegan Food' });
+  res.render('index', { title: 'Find Me Vegan', user: req.user });
 });
 
 // Google OAuth login route
@@ -16,8 +16,8 @@ router.get('/auth/google', passport.authenticate(
 router.get('/oauth2callback', passport.authenticate(
   'google',
   {
-    successRedirect : '/users',
-    failureRedirect : '/users'
+    successRedirect : '/',
+    failureRedirect : '/'
   }
 ));
 

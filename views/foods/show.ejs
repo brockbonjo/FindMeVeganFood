@@ -6,10 +6,12 @@
     <% include ../partials/header %>
     <div class="container">      
       <a href="./" class="waves-effect waves-teal btn-flat"><i class="material-icons left">arrow_back</i>Back</a>
-      <h1>Details</h1>
-      <form action="/foods/<%= food._id %>?_method=DELETE" method="POST">
-        <button class="waves-effect waves-teal btn-flat" type="submit"><i class="material-icons left">delete</i>Delete</button>
-      </form>
+      <h1 class="chosen-heading-font">Details</h1>
+      <% if (isOwner) { %>
+        <form action="/foods/<%= food._id %>?_method=DELETE" method="POST">
+          <button class="waves-effect waves-teal btn-flat" type="submit"><i class="material-icons left">delete</i>Delete</button>
+        </form>
+      <% } %>
       <table>
         <thead>
             <tr>
@@ -24,7 +26,9 @@
             </tr>
         </tbody>
       </table>
-      <a href="/foods/<%= food._id %>/edit" method="GET" class="waves-effect waves-teal btn-flat"><i class="material-icons left">create</i>Update</a>
+      <% if (isOwner) { %>
+        <a href="/foods/<%= food._id %>/edit" method="GET" class="waves-effect waves-teal btn-flat"><i class="material-icons left">create</i>Update</a>
+      <% } %>
     </div>
     <% include ../partials/footer %>
   </body>

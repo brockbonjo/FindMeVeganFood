@@ -6,7 +6,7 @@
     <% include ../partials/header %>
     <div class="container">
       <a href="./" class="waves-effect waves-teal btn-flat"><i class="material-icons left">home</i>Home</a>
-      <h1><%= title %></h1>
+      <h1 class="chosen-heading-font"><%= title %></h1>
       <table>
         <tbody>
           <% foods.forEach((food) => { %>
@@ -17,8 +17,10 @@
           <% }) %>
         </tbody>
       </table><br>
-      <a href="/foods/new" class="waves-effect waves-teal btn-flat"><i class="material-icons left">add</i>Add new food item</a>
-    </div>
+      <% if (user) { %>
+        <a href="/foods/new" class="waves-effect waves-teal btn-flat"><i class="material-icons left">add</i>Add new food item</a>
+      <% } %>  
+      </div>
     <% include ../partials/footer %>
   </body>
 </html>

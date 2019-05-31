@@ -13,6 +13,10 @@ const foodSchema = new Schema({
         ref: 'Restaurant',
         required: true,
     },
+    user: {
+        type: Schema.ObjectId,
+        ref: 'User'
+    }
 });
 
 module.exports = mongoose.model('Food', foodSchema);

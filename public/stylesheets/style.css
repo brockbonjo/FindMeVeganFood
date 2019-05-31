@@ -12,3 +12,15 @@
 .icon-block .material-icons {
 	font-size: inherit;
 }
+
+.chosen-heading-font {
+  font-family: 'Amatic SC', cursive;
+  font-weight: bold;
+}
+
+.chosen-heading-font-bold-orange {
+  font-family: 'Amatic SC', cursive;
+  font-weight: bold;
+  color: orange;
+  text-align: center;
+}

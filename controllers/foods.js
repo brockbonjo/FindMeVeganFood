@@ -8,25 +8,29 @@ module.exports = {
     create,
     deleteFood,
     editFood,
-    update
+    update,
 };
 
 
 async function editFood(req, res) {
-    console.log(req.body);
-    console.log(req.params.id);
-    const food = await Food.findOneAndUpdate({ _id: req.params.id }, { 
-      name: req.body.name, 
-      foodType: req.body.foodType, 
-      restaurant: req.body.restaurant,
-  }).exec();
-    res.redirect(`/foods/${req.params.id}`);
+    if (req.user) {
+        const food = await findOne({_id: req.params.id});
+        if (food.user === req.user._id) {
+            await Food.findOneAndUpdate({ _id: req.params.id }, { 
+              name: req.body.name, 
+              foodType: req.body.foodType, 
+              restaurant: req.body.restaurant,
+          }).exec();
+            return res.redirect(`/foods/${req.params.id}`);
+        }
+    }
+    res.redirect('/foods');
 };
 
 async function update(req, res) {
     const food = await Food.findById(req.params.id);
     const restaurants = await Restaurant.find({});
-    res.render('foods/edit', { title: 'Edit Food', food, restaurants });
+    res.render('foods/edit', { title: 'Edit Food', food, restaurants, user: req.user });
 };
 
 async function index(req, res, next) {
@@ -34,37 +38,45 @@ async function index(req, res, next) {
         const regex = new RegExp(`.*${req.query.search}.*`);
         const query = { '$regex': regex, '$options': 'i' };
         const foods = await Food.find({}).or([{ name: query }, { foodType: query }]).populate('restaurant');
-        res.render('foods/index', { title: `Food List - ${req.query.search}`, foods });
+        res.render('foods/index', { title: `Food List - ${req.query.search}`, foods, user: req.user });
     } else {
         const foods = await Food.find({}).populate('restaurant');
-        res.render('foods/index', { title: 'Food List', foods });
+        res.render('foods/index', { title: 'Food List', foods, user: req.user });
     }
 };
 
 async function show(req, res) {
     const food = await Food.findById(req.params.id).populate('restaurant');
-    res.render('foods/show', { food });
+    const isOwner = req.user && (req.user._id.toString() == food.user.toString());
+    res.render('foods/show', { food, user: req.user, isOwner });
 };
   
 async function newFood(req, res) {
-    const restaurants = await Restaurant.find({});
-    res.render('foods/new', { title: 'Add New Food', restaurants });
+    if (req.user) {
+        const restaurants = await Restaurant.find({});
+        return res.render('foods/new', { title: 'Add New Food', restaurants, user: req.user });
+    } 
+    res.redirect('/foods');
 };
   
 async function create(req, res) {
-    console.log(req.body);
-    const food = await new Food({ 
-        name: req.body.name, 
-        foodType: req.body.foodType, 
-        restaurant: req.body.restaurant,
-    }).save();
+    if (req.user) {
+        const food = await new Food({ 
+            name: req.body.name, 
+            foodType: req.body.foodType, 
+            restaurant: req.body.restaurant,
+            user: req.user._id
+        }).save();
+    }
     res.redirect('/foods');
-}
+};
 
-function deleteFood(req, res) {
-    Food.findByIdAndDelete(req.params.id, function(err, food){
-      if (err) return res.redirect('/foods');
-        console.log(food);
-      res.redirect('/foods');
-    });
-  };
+async function deleteFood(req, res) {
+    if (req.user) {
+        const food = await findOne({_id: req.params.id});
+        if (food.user === req.user._id) {
+            await Food.findByIdAndDelete(req.params.id).exec();
+        }
+    }
+    res.redirect('/foods');
+};
