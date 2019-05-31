@@ -28,13 +28,64 @@
               <td><%= food.name %></td>
               <% if (user) { %>
                 <td>
-                  <div class="rating-container"> 
-                    <i class="material-icons rating-star" id="1">star_border</i> 
-                    <i class="material-icons rating-star" id="2">star_border</i> 
-                    <i class="material-icons rating-star" id="3">star_border</i> 
-                    <i class="material-icons rating-star" id="4">star_border</i> 
-                    <i class="material-icons rating-star" id="5">star_border</i> 
-                  </div>
+                  <% if (!review || review.rating === 0) { %>
+
+                    <div class="rating-container"> 
+                      <i class="material-icons rating-star" id="1">star_border</i> 
+                      <i class="material-icons rating-star" id="2">star_border</i> 
+                      <i class="material-icons rating-star" id="3">star_border</i> 
+                      <i class="material-icons rating-star" id="4">star_border</i> 
+                      <i class="material-icons rating-star" id="5">star_border</i> 
+                    </div>
+                  <% } else { %>
+                    <div class="rating-container"> 
+                        <i class="material-icons rating-star" id="1">
+                          <% if (review.rating >= 1) { %>
+                            star
+                          <% } else if (review.rating >= 0.5) { %>
+                            star_half
+                          <% } else { %>
+                            star_border
+                          <% } %>
+                        </i> 
+                        <i class="material-icons rating-star" id="2">
+                            <% if (review.rating >= 2) { %>
+                              star
+                            <% } else if (review.rating >= 1.5) { %>
+                              star_half
+                            <% } else { %>
+                              star_border
+                            <% } %>
+                        </i> 
+                        <i class="material-icons rating-star" id="3">
+                            <% if (review.rating >= 3) { %>
+                              star
+                            <% } else if (review.rating >= 2.5) { %>
+                              star_half
+                            <% } else { %>
+                              star_border
+                            <% } %>
+                        </i> 
+                        <i class="material-icons rating-star" id="4">
+                            <% if (review.rating >= 4) { %>
+                              star
+                            <% } else if (review.rating >= 3.5) { %>
+                              star_half
+                            <% } else { %>
+                              star_border
+                            <% } %>
+                        </i> 
+                        <i class="material-icons rating-star" id="5">
+                            <% if (review.rating === 5) { %>
+                              star
+                            <% } else if (review.rating >= 4.5) { %>
+                              star_half
+                            <% } else { %>
+                              star_border
+                            <% } %>
+                        </i> 
+                      </div>
+                  <% } %>
                 </td>
               <% } %>
             </tr>
@@ -58,8 +109,8 @@
             food: '<%= food._id %>',
             rating: Number(e.target.id)
           }
-        }).done(function() {
-          alert('rating added');
+        }).done(() => {
+          location.reload();
         })
       })
     </script>

@@ -10,14 +10,14 @@ async function rating(req, res) {
     if (review) {
         review.rating = Number(req.body.rating);
         await review.save();
-        res.json(review);
+        res.redirect(`/foods/${req.body.food}`);
     } else {
         review = await new Review({
             user: req.body.user,
             food: req.body.food,
             rating: Number(req.body.rating),
         }).save();
-        res.json(review);
+        res.redirect(`/foods/${req.body.food}`);
     }
 }
 

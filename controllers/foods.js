@@ -63,8 +63,15 @@ async function index(req, res, next) {
 
 async function show(req, res) {
     const food = await Food.findById(req.params.id).populate('restaurant');
+    let review;
+    if (req.user) {
+        review = await Review.findOne({
+            user: req.user._id,
+            food: food._id,
+        }).exec();
+    }
     // const isOwner = req.user && (req.user._id.toString() == food.user.toString());
-    res.render('foods/show', { food, user: req.user,/* isOwner */});
+    res.render('foods/show', { food, user: req.user, review, /* isOwner */});
 };
   
 async function newFood(req, res) {
