@@ -24,15 +24,15 @@ A user will use a search bar to input a dish they're looking to find in Austin. 
 
 
 ### Screenshots
-![alt text](https://imgur.com/xOcQBUi "Home Page")
+![home page](https://imgur.com/xOcQBUi)
 
-![alt text](~https://imgur.com/jN3jfBK "Search Results")
+![search results](~https://imgur.com/jN3jfBK)
 
-![alt text](https://imgur.com/R51Fn7e "Food List")
+![food list](https://imgur.com/R51Fn7e)
 
-![alt text](https://imgur.com/CJU7j9q "Details Page")
+![details page](https://imgur.com/CJU7j9q)
 
-![alt text](https://imgur.com/MRDhht0 "Update Page")
+![update page](https://imgur.com/MRDhht0)
 
 
 
