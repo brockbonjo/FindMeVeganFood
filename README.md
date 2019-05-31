@@ -24,15 +24,15 @@ A user will use a search bar to input a dish they're looking to find in Austin. 
 
 
 ### Screenshots
-![alt text](~/Library/Group Containers/group.com.apple.notes/Media/69CA8164-934B-4756-B010-3F038A18B68E/FMV_homepage.jpeg "Home Page")
+![alt text](https://imgur.com/xOcQBUi "Home Page")
 
-![alt text](~/Library/Group Containers/group.com.apple.notes/Media/0243A31E-6196-4121-87AF-FA1BCF4ED6DF/FMV_searchresults.jpeg "Search Results")
+![alt text](~https://imgur.com/jN3jfBK "Search Results")
 
-![alt text](~/Library/Group Containers/group.com.apple.notes/Media/ED0113E4-6AC1-45BA-BD6C-0D287AC995D7/FMV_foodlist.jpeg "Food List")
+![alt text](https://imgur.com/R51Fn7e "Food List")
 
-![alt text](~/Library/Group Containers/group.com.apple.notes/Media/CB8E17C3-9DD6-4860-AFB6-559D1A015101/FMV_detailspage.jpeg "Details Page")
+![alt text](https://imgur.com/CJU7j9q "Details Page")
 
-![alt text](~/Library/Group Containers/group.com.apple.notes/Media/9989F1D7-DA01-420D-B1D6-1E4DA324E331/FMV_updatepage.jpeg "Update Page")
+![alt text](https://imgur.com/MRDhht0 "Update Page")
 
 
 
