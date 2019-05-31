@@ -13,14 +13,40 @@
 	font-size: inherit;
 }
 
-.chosen-heading-font {
-  font-family: 'Amatic SC', cursive;
+.chosen-heading-font-bold {
+  font-family: 'Permanent Marker', cursive;
   font-weight: bold;
 }
 
+.chosen-heading-font {
+  font-family: 'Permanent Marker', cursive;
+}
+
 .chosen-heading-font-bold-orange {
-  font-family: 'Amatic SC', cursive;
+  font-family: 'Permanent Marker', cursive;
   font-weight: bold;
   color: orange;
   text-align: center;
+}
+
+.card-title {
+  margin-bottom: 0 !important;
+}
+
+.rating-container {
+  margin-top: 15px;
+}
+
+.rating-star {
+  color: gold;
+}
+
+.rating-star:hover {
+  cursor: pointer;
+}
+
+.card-action {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }

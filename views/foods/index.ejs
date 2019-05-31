@@ -1,22 +1,89 @@
 <!DOCTYPE html>
 <html>
   <% include ../partials/head %>
-
+  
   <body>
     <% include ../partials/header %>
     <div class="container">
       <a href="./" class="waves-effect waves-teal btn-flat"><i class="material-icons left">home</i>Home</a>
       <h1 class="chosen-heading-font"><%= title %></h1>
-      <table>
-        <tbody>
-          <% foods.forEach((food) => { %>
-            <tr>
-              <td><%= food.restaurant.name %> | <%= food.name %></td>
-              <td><a href="/foods/<%= food._id %>">Details</a></td>
-            </tr>
-          <% }) %>
-        </tbody>
-      </table><br>
+
+
+
+
+    <div class="row">
+      <% foods.forEach((food) => { %>
+        <div class="col m12 l6">
+          <div class="card blue-grey darken-1">
+            <div class="card-content white-text">
+              <span class="card-title"><%= food.name %></span>
+              <span class="card-title-restaurant"><%= food.restaurant.name %></span>
+              <% if (food.rating > 0) { %>
+                <div class="rating-container"> 
+                  <i class="material-icons rating-star">
+                    <% if (food.rating >= 1) { %>
+                      star
+                    <% } else if (food.rating >= 0.5) { %>
+                      star_half
+                    <% } else { %>
+                      star_border
+                    <% } %>
+                  </i> 
+                  <i class="material-icons rating-star">
+                      <% if (food.rating >= 2) { %>
+                        star
+                      <% } else if (food.rating >= 1.5) { %>
+                        star_half
+                      <% } else { %>
+                        star_border
+                      <% } %>
+                  </i> 
+                  <i class="material-icons rating-star">
+                      <% if (food.rating >= 3) { %>
+                        star
+                      <% } else if (food.rating >= 2.5) { %>
+                        star_half
+                      <% } else { %>
+                        star_border
+                      <% } %>
+                  </i> 
+                  <i class="material-icons rating-star">
+                      <% if (food.rating >= 4) { %>
+                        star
+                      <% } else if (food.rating >= 3.5) { %>
+                        star_half
+                      <% } else { %>
+                        star_border
+                      <% } %>
+                  </i> 
+                  <i class="material-icons rating-star">
+                      <% if (food.rating === 5) { %>
+                        star
+                      <% } else if (food.rating >= 4.5) { %>
+                        star_half
+                      <% } else { %>
+                        star_border
+                      <% } %>
+                  </i> 
+                </div>
+              <% } %>
+              <% if (food.rating === 0) { %>
+                <div class="rating-container"> 
+                  <i class="material-icons rating-star">star_border</i> 
+                  <i class="material-icons rating-star">star_border</i> 
+                  <i class="material-icons rating-star">star_border</i> 
+                  <i class="material-icons rating-star">star_border</i> 
+                  <i class="material-icons rating-star">star_border</i> 
+                </div>
+              <% } %>
+            </div>
+            <div class="card-action">
+              <a href="/foods/<%= food._id %>">Details</a>
+            </div>
+          </div>
+        </div>
+        <% }) %>
+      </div>
       <% if (user) { %>
         <a href="/foods/new" class="waves-effect waves-teal btn-flat"><i class="material-icons left">add</i>Add new food item</a>
       <% } %>  

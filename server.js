@@ -20,6 +20,7 @@ require('./config/passport');
 var indexRoutes = require('./routes/index');
 var usersRoutes = require('./routes/users');
 var foodsRoutes = require('./routes/foods');
+var reviewsRoutes = require('./routes/reviews');
 
 app.use(methodOverride('_method'));
 
@@ -49,6 +50,7 @@ app.use(passport.session());
 app.use('/', indexRoutes);
 app.use('/', usersRoutes);
 app.use('/foods', foodsRoutes);
+app.use('/reviews', reviewsRoutes);
 
 // invalid request, send 404 page
 app.use(function(req, res) {

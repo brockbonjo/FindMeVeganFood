@@ -7,7 +7,7 @@
     <div class="container">      
       <a href="./" class="waves-effect waves-teal btn-flat"><i class="material-icons left">arrow_back</i>Back</a>
       <h1 class="chosen-heading-font">Details</h1>
-      <% if (isOwner) { %>
+      <% if (user) { %>
         <form action="/foods/<%= food._id %>?_method=DELETE" method="POST">
           <button class="waves-effect waves-teal btn-flat" type="submit"><i class="material-icons left">delete</i>Delete</button>
         </form>
@@ -17,19 +17,51 @@
             <tr>
               <th>Restaurant Name</th>
               <th>Menu Item</th>
+              <% if (user) { %>
+                <th>Rate It</th>
+              <% } %>
             </tr>
           </thead>
         <tbody>
             <tr>
               <td><%= food.restaurant.name %></td> 
               <td><%= food.name %></td>
+              <% if (user) { %>
+                <td>
+                  <div class="rating-container"> 
+                    <i class="material-icons rating-star" id="1">star_border</i> 
+                    <i class="material-icons rating-star" id="2">star_border</i> 
+                    <i class="material-icons rating-star" id="3">star_border</i> 
+                    <i class="material-icons rating-star" id="4">star_border</i> 
+                    <i class="material-icons rating-star" id="5">star_border</i> 
+                  </div>
+                </td>
+              <% } %>
             </tr>
         </tbody>
       </table>
-      <% if (isOwner) { %>
+      <% if (user) { %>
         <a href="/foods/<%= food._id %>/edit" method="GET" class="waves-effect waves-teal btn-flat"><i class="material-icons left">create</i>Update</a>
       <% } %>
     </div>
     <% include ../partials/footer %>
   </body>
+  <% if (user) { %>
+    <script>
+      $('.rating-star').on('click', function(e) {
+        console.log('foo')
+        $.ajax({
+          url: '/reviews',
+          method: 'POST',
+          data: {
+            user: '<%= user._id %>',
+            food: '<%= food._id %>',
+            rating: Number(e.target.id)
+          }
+        }).done(function() {
+          alert('rating added');
+        })
+      })
+    </script>
+  <% } %>
 </html>
